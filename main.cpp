@@ -347,8 +347,8 @@ void drawAngledHouseRight(float x, float y, float scale) {
     // 6. Side Roof
     glColor3f(0.7f, 0.45f, 0.25f);
     glBegin(GL_QUADS);
-        glVertex2f(-0.05f, 0.15f); // Far left overhang
-        glVertex2f( 0.20f, 0.15f); // Middle peak connection
+        glVertex2f(-0.05f, 0.15f); // Far left 
+        glVertex2f( 0.20f, 0.15f); // Middle peak 
         glVertex2f( 0.35f, 0.28f); // Top peak left side
         glVertex2f( 0.10f, 0.28f); // Top peak far left
     glEnd();
@@ -406,17 +406,17 @@ void drawAngledHouseLeft(float x, float y, float scale) {
     // 6. Front Roof
     glColor3f(0.7f, 0.45f, 0.25f);
     glBegin(GL_TRIANGLES);
-        glVertex2f(-0.05f, 0.15f); // Left overhang
-        glVertex2f( 0.25f, 0.15f); // Right overhang
-        glVertex2f( 0.10f, 0.28f); // Top peak
+        glVertex2f(-0.05f, 0.15f); 
+        glVertex2f( 0.25f, 0.15f); 
+        glVertex2f( 0.10f, 0.28f); 
     glEnd();
 
     // 7. Side Roof
     glBegin(GL_QUADS);
-        glVertex2f( 0.10f, 0.28f); // Connects to top peak
-        glVertex2f( 0.25f, 0.15f); // Connects to right overhang
-        glVertex2f( 0.50f, 0.15f); // Back right overhang
-        glVertex2f( 0.35f, 0.28f); // Back top peak
+        glVertex2f( 0.10f, 0.28f); 
+        glVertex2f( 0.25f, 0.15f); 
+        glVertex2f( 0.50f, 0.15f); 
+        glVertex2f( 0.35f, 0.28f); 
     glEnd();
 
     glPopMatrix();
@@ -469,9 +469,9 @@ void drawRiversideHouse(float x, float y, float scale) {
     // 6. Sloped Roof
     glColor3f(0.45f, 0.25f, 0.12f);
     glBegin(GL_TRIANGLES);
-        glVertex2f(0.02f, 0.20f);  // Left overhang
-        glVertex2f(0.38f, 0.20f);  // Right overhang
-        glVertex2f(0.20f, 0.33f);  // Roof peak
+        glVertex2f(0.02f, 0.20f);  
+        glVertex2f(0.38f, 0.20f);  
+        glVertex2f(0.20f, 0.33f); 
     glEnd();
 
     glPopMatrix();
@@ -796,7 +796,7 @@ drawGrass(-0.1f,-0.3f);
 
     //  6 Normal Trees
     for (int i = 0; i < 6; i++) {
-        // Stays strictly on the left side (X ranges from -0.95 to -0.45)
+       
         float posX = -0.95f + (i * 0.10f);
         float posY = 0.25f + ((i % 2) * 0.05f); // Slight height variation
         float scaleSize = 0.5f + ((i % 2) * 0.1f);
@@ -806,7 +806,7 @@ drawGrass(-0.1f,-0.3f);
 
     // 2. Draw 4 Round Trees on left
     for (int i = 0; i < 4; i++) {
-        // Stays clustered on the left side, slightly behind/offset
+       
         float posX = -0.90f + (i * 0.12f);
         float posY = 0.32f + ((i % 2) * -0.04f);
         float scaleSize = 0.55f;
@@ -844,7 +844,7 @@ drawGrass(-0.1f,-0.3f);
      drawCloud(0.64f,0.7f);
 
 
-    // 5. SHOW ON SCREEN
+  
     glutSwapBuffers();
 }
 
