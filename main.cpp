@@ -90,6 +90,15 @@ void drawMountain(float width, float height) {
     glEnd();
 }
 
+//Small green hill for the base of the mountains
+void drawFoothill(float width, float height) {
+    glColor3f(0.25f, 0.6f, 0.15f); // Dark green to blend with the ground
+    glBegin(GL_TRIANGLES);
+        glVertex2f(-width / 2.0f, 0.0f);
+        glVertex2f( width / 2.0f, 0.0f);
+        glVertex2f( 0.0f, height);
+    glEnd();
+}
 
 // 5. Tree
 void drawTree(float x, float y, float scale) {
@@ -347,8 +356,8 @@ void drawAngledHouseRight(float x, float y, float scale) {
     // 6. Side Roof
     glColor3f(0.7f, 0.45f, 0.25f);
     glBegin(GL_QUADS);
-        glVertex2f(-0.05f, 0.15f); // Far left 
-        glVertex2f( 0.20f, 0.15f); // Middle peak 
+        glVertex2f(-0.05f, 0.15f); // Far left overhang
+        glVertex2f( 0.20f, 0.15f); // Middle peak connection
         glVertex2f( 0.35f, 0.28f); // Top peak left side
         glVertex2f( 0.10f, 0.28f); // Top peak far left
     glEnd();
@@ -406,17 +415,17 @@ void drawAngledHouseLeft(float x, float y, float scale) {
     // 6. Front Roof
     glColor3f(0.7f, 0.45f, 0.25f);
     glBegin(GL_TRIANGLES);
-        glVertex2f(-0.05f, 0.15f); 
-        glVertex2f( 0.25f, 0.15f); 
-        glVertex2f( 0.10f, 0.28f); 
+        glVertex2f(-0.05f, 0.15f); // Left overhang
+        glVertex2f( 0.25f, 0.15f); // Right overhang
+        glVertex2f( 0.10f, 0.28f); // Top peak
     glEnd();
 
     // 7. Side Roof
     glBegin(GL_QUADS);
-        glVertex2f( 0.10f, 0.28f); 
-        glVertex2f( 0.25f, 0.15f); 
-        glVertex2f( 0.50f, 0.15f); 
-        glVertex2f( 0.35f, 0.28f); 
+        glVertex2f( 0.10f, 0.28f); // Connects to top peak
+        glVertex2f( 0.25f, 0.15f); // Connects to right overhang
+        glVertex2f( 0.50f, 0.15f); // Back right overhang
+        glVertex2f( 0.35f, 0.28f); // Back top peak
     glEnd();
 
     glPopMatrix();
@@ -469,9 +478,9 @@ void drawRiversideHouse(float x, float y, float scale) {
     // 6. Sloped Roof
     glColor3f(0.45f, 0.25f, 0.12f);
     glBegin(GL_TRIANGLES);
-        glVertex2f(0.02f, 0.20f);  
-        glVertex2f(0.38f, 0.20f);  
-        glVertex2f(0.20f, 0.33f); 
+        glVertex2f(0.02f, 0.20f);  // Left overhang
+        glVertex2f(0.38f, 0.20f);  // Right overhang
+        glVertex2f(0.20f, 0.33f);  // Roof peak
     glEnd();
 
     glPopMatrix();
@@ -633,6 +642,44 @@ void drawSchool(float x, float y, float scale) {
     glPopMatrix();
 }
 
+//Fenches around the school
+
+void drawFence(float x, float y, float scale, float angle) {
+    glPushMatrix();
+
+    // Move it to the spot
+    glTranslatef(x, y, 0.0f);
+
+    // Rotate it
+    glRotatef(angle, 0.0f, 0.0f, 1.0f);
+
+    // 3. Scale it
+    glScalef(scale, scale, 1.0f);
+
+    glColor3f(0.55f, 0.35f, 0.15f);
+
+    glBegin(GL_QUADS);
+        glVertex2f(0.0f, 0.12f);  glVertex2f(0.45f, 0.12f);
+        glVertex2f(0.45f, 0.14f); glVertex2f(0.0f, 0.14f);
+        glVertex2f(0.0f, 0.04f);  glVertex2f(0.45f, 0.04f);
+        glVertex2f(0.45f, 0.06f); glVertex2f(0.0f, 0.06f);
+    glEnd();
+
+    float postX[3] = {0.05f, 0.225f, 0.40f};
+    for(int i = 0; i < 3; i++) {
+        float px = postX[i];
+        glBegin(GL_QUADS);
+            glVertex2f(px - 0.02f, 0.0f);
+              glVertex2f(px + 0.02f, 0.0f);
+            glVertex2f(px + 0.02f, 0.18f);
+             glVertex2f(px - 0.02f, 0.18f);
+        glEnd();
+
+    }
+
+    glPopMatrix();
+}
+
 
 // Boat
 void drawBoat(float x, float y) {
@@ -656,15 +703,19 @@ void drawBoat(float x, float y) {
     // 3. Boat Hull
     glColor3f(0.5f, 0.3f, 0.1f);
     glBegin(GL_POLYGON);
-        glVertex2f(-0.12f, 0.0f);  glVertex2f(0.12f, 0.0f);
-        glVertex2f( 0.07f, -0.04f); glVertex2f(-0.07f, -0.04f);
+        glVertex2f(-0.12f, 0.0f);
+         glVertex2f(0.12f, 0.0f);
+        glVertex2f( 0.07f, -0.04f);
+         glVertex2f(-0.07f, -0.04f);
     glEnd();
 
     // 4. Boat Cabin
     glColor3f(0.8f, 0.8f, 0.8f);
     glBegin(GL_QUADS);
-        glVertex2f(-0.05f, 0.0f);  glVertex2f(0.05f, 0.0f);
-        glVertex2f( 0.05f, 0.07f); glVertex2f(-0.05f, 0.07f);
+        glVertex2f(-0.05f, 0.0f);
+          glVertex2f(0.05f, 0.0f);
+        glVertex2f( 0.05f, 0.07f);
+         glVertex2f(-0.05f, 0.07f);
     glEnd();
 
     glPopMatrix();
@@ -718,32 +769,49 @@ glColor3f(1.0f,0.85f,0.0f);
 drawCircle(-0.9f,0.89f,0.065f,90);
 
 
+//Tree nehind the cloud
+ drawTree(0.63f, 0.57f, 0.3f);
+
 //behind the mountain cloud
   drawCloud(0.64f,0.7f);
 
+  // house behind mountain
+
+  drawVillageHouse(0.234,0.5,0.2);
+
+
+  //behind mountain tree
+
+   drawTree(-0.9f, 0.6f, 0.3f);
+   drawTree(-0.26f, 0.55f, 0.3f);
+    drawTree(0.33f, 0.57f, 0.3f);
 
     //mountain-s1
     glPushMatrix();
     glTranslatef(-0.1f,0.4f,0.0f);
     drawMountain(0.5f,0.4f);
+
     glPopMatrix();
 
      //mountain-s2
     glPushMatrix();
     glTranslatef(0.0f,0.4f,0.0f);
     drawMountain(0.7f,0.4f);
+      drawFoothill(0.4,0.07);
     glPopMatrix();
 
      //mountain-l3
     glPushMatrix();
     glTranslatef(-0.4f,0.4f,0.0f);
     drawMountain(0.5f,0.4f);
+      drawFoothill(0.4,0.07);
     glPopMatrix();
 
      //mountain-l4
     glPushMatrix();
     glTranslatef(-0.8f,0.4f,0.0f);
     drawMountain(0.5f,0.4f);
+
     glPopMatrix();
 
        //mountain-l5
@@ -757,13 +825,21 @@ drawCircle(-0.9f,0.89f,0.065f,90);
     glPushMatrix();
     glTranslatef(0.4f,0.4f,0.0f);
     drawMountain(0.4f,0.3f);
+    drawFoothill(0.4,0.07);
+
     glPopMatrix();
+// house behind the right most hill
+     drawVillageHouse(0.424,0.4,0.3);
 
       //mountain-r7
     glPushMatrix();
     glTranslatef(0.8f,0.4f,0.0f);
     drawMountain(0.7f,0.4f);
+    drawFoothill(0.4,0.07);
     glPopMatrix();
+
+    // downhill details
+
 
     //tree-1
     drawTree(0.9f, 0.06f, 0.9f);
@@ -794,40 +870,72 @@ drawGrass(-0.1f,-0.3f);
 
 
 
-    //  6 Normal Trees
-    for (int i = 0; i < 6; i++) {
-       
-        float posX = -0.95f + (i * 0.10f);
-        float posY = 0.25f + ((i % 2) * 0.05f); // Slight height variation
-        float scaleSize = 0.5f + ((i % 2) * 0.1f);
+    //Normal Trees
+// 6 Normal Trees on left
+    drawTree(-0.95f, 0.25f, 0.5f);
+    drawTree(-0.85f, 0.30f, 0.6f);
+    drawTree(-0.75f, 0.25f, 0.5f);
+    drawTree(-0.65f, 0.30f, 0.6f);
+    drawTree(-0.55f, 0.25f, 0.5f);
+    drawTree(-0.45f, 0.30f, 0.6f);
 
-        drawTree(posX, posY, scaleSize);
-    }
+    // 4 Round Trees on left
+    drawRoundTree(-0.90f, 0.32f, 0.55f);
+    drawRoundTree(-0.78f, 0.28f, 0.55f);
+    drawRoundTree(-0.66f, 0.32f, 0.55f);
+    drawRoundTree(-0.54f, 0.28f, 0.55f);
 
-    // 2. Draw 4 Round Trees on left
-    for (int i = 0; i < 4; i++) {
-       
-        float posX = -0.90f + (i * 0.12f);
-        float posY = 0.32f + ((i % 2) * -0.04f);
-        float scaleSize = 0.55f;
 
-        drawRoundTree(posX, posY, scaleSize);
-    }
+ // 4 Round Trees on left
+    drawRoundTree(-0.90f, 0.32f, 0.55f);
+    drawRoundTree(-0.78f, 0.28f, 0.55f);
+    drawRoundTree(-0.66f, 0.32f, 0.55f);
+    drawRoundTree(-0.54f, 0.28f, 0.55f);
 
   drawTree(-0.8f, 0.1f, 1.0f);
   drawRoundTree(-0.6f,0.3f,0.5f);
       drawTree(-0.7f, 0.3f, 0.6f);
 
-    //farone
+    //farone paddyStorage
     drawPaddyStorage(-0.1f,0.3f,0.3f);
 
-    //leftone
+    //leftone paddyStorage
      drawPaddyStorage(-0.48f,-0.06f,0.7f);
 
     drawVillage_toilet(-0.9f, -0.1f, 0.6f);
      drawVillage_toilet(-0.15f, 0.26f, 0.3f);
+
     drawVillageHouseF(-0.3f, -0.1f, 0.8f);
+
     drawSchool(0.2f, -0.2f, 0.75f);
+    //Fenches
+
+  // --- 1. Angled Fence (Going down to the river) ---
+    drawFence(-0.1f, -0.33f, 0.3f, -34.0f);
+    drawFence( 0.012f, -0.405f, 0.3f, -34.0f);
+    drawFence( 0.124f, -0.48f, 0.3f, -34.0f);
+    drawFence( 0.2f, -0.53f, 0.3f, -34.0f); // Touches the river
+
+    // --- 2. Smooth Curve (Turning the corner towards the school) ---
+    drawFence(-0.1f, -0.33f, 0.3f, 25.0f);
+    drawFence( 0.022f, -0.273f, 0.3f, 10.0f);
+
+    //  Horizontal Field Fence
+
+    drawFence( 0.155f, -0.25f, 0.3f, 0.0f);
+    drawFence( 0.29f, -0.25f, 0.3f, 0.0f);
+    drawFence( 0.425f, -0.25f, 0.3f, 0.0f);
+    drawFence( 0.56f, -0.25f, 0.3f, 0.0f);
+    drawFence( 0.695f, -0.25f, 0.3f, 0.0f); //school end fence
+      drawFence( 0.84f, 0.024f, 0.4f, 0.0f); //behind school fence
+
+      //Near(linear to river)
+       drawFence( 0.29f, -0.6f, 0.3f, 0.0f);
+       drawFence( 0.425f, -0.6f, 0.3f, 0.0f);
+        drawFence( 0.56f, -0.6f, 0.3f, 0.0f);
+        drawFence( 0.695f, -0.6f, 0.3f, 0.0f);
+      drawFence( 0.84f, -0.6f, 0.3f, 0.0f);
+
     drawAngledHouseLeft(-0.4f,0.2f,0.5f);
      drawAngledHouseLeft(-0.1f,0.2f,0.4f);
       drawVillageHouseF(0.11f, 0.21f, 0.4f);
@@ -841,10 +949,10 @@ drawGrass(-0.1f,-0.3f);
     drawTubeWell(-0.6f,-0.1f);
     drawCloud(0.0f,0.8f);
      drawCloud(-0.6f,0.9f);
-     drawCloud(0.64f,0.7f);
 
+     drawVillageHouse(-0.4,-0.1,0.8);
 
-  
+    // 5. SHOW ON SCREEN
     glutSwapBuffers();
 }
 
