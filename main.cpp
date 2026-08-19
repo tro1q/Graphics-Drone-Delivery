@@ -117,18 +117,17 @@ void drawTree(float x, float y, float scale) {
         glVertex2f( 0.0f, 40.0f);
     glEnd();
 
-    glPopMatrix(); // Restore the screen state
+    glPopMatrix(); 
 }
 
 //Round Tree
 void drawRoundTree(float x, float y, float scale) {
     glPushMatrix();
 
-    // Move to the position (x, y) and then scale it
     glTranslatef(x, y, 0.0f);
     glScalef(scale, scale, 1.0f);
 
-    // Draw the trunk starting at 0,0
+    // Draw the trunk 
     glColor3f(0.40f, 0.25f, 0.15f);
     glBegin(GL_QUADS);
         glVertex2f(-3.0f, 0.0f);
@@ -347,7 +346,7 @@ void drawVillage_toilet(float x, float y, float scale) {
 void drawVillageHouseF(float x, float y, float scale) {
     glPushMatrix();
 
-    // Move to the (x,y) location and scale it
+    
     glTranslatef(x, y, 0.0f);
     glScalef(scale, scale, 1.0f);
 
@@ -595,7 +594,7 @@ void drawRiversideHouse(float x, float y, float scale) {
 void drawPaddyStorage(float x, float y, float scale) {
     glPushMatrix();
 
-    // Move to the (x,y) location and scale it
+    
     glTranslatef(x, y, 0.0f);
     glScalef(scale, scale, 1.0f);
 
